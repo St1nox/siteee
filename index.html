@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Сайт-визитка Стрионова Артема Андреевича — студент ГУАП, интересы в области искусственного интеллекта и науки о данных.">
+  <title>Стрионов Артем — личное портфолио</title>
+  <style>
+    :root {
+      --bg: #090b12;
+      --surface: #111522;
+      --surface-2: #171d2d;
+      --text: #f2f4fb;
+      --muted: #a4abc0;
+      --line: rgba(255,255,255,.09);
+      --blue: #6c8cff;
+      --violet: #a477ff;
+      --cyan: #63d8e8;
+      --radius: 22px;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0; color: var(--text);
+      background:
+        radial-gradient(ellipse at 80% 0%, rgba(103,119,255,.15), transparent 35%),
+        radial-gradient(ellipse at 0% 35%, rgba(164,119,255,.09), transparent 30%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(9,11,18,.78);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 72px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { font-weight: 800; letter-spacing: .04em; font-size: 1.05rem; }
+    .brand span { color: var(--blue); }
+    nav { display:flex; gap:25px; align-items:center; }
+    nav a { color: var(--muted); font-size:.9rem; transition:color .2s; }
+    nav a:hover { color:var(--text); }
+    .menu-btn { display:none; border:1px solid var(--line); color:var(--text); background:var(--surface); border-radius:12px; padding:9px 12px; }
+    .hero { min-height: 690px; display:grid; grid-template-columns: 1.25fr .75fr; align-items:center; gap:50px; padding:88px 0 100px; }
+    .eyebrow { color:var(--cyan); text-transform:uppercase; letter-spacing:.18em; font-size:.76rem; font-weight:700; }
+    h1 { font-size:clamp(2.7rem, 6vw, 5.4rem); line-height:1.03; letter-spacing:-.055em; margin:22px 0; }
+    h1 .gradient, .gradient { background:linear-gradient(100deg,var(--blue),var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .hero p { color:var(--muted); max-width:650px; font-size:1.1rem; }
+    .hero-actions { display:flex; gap:13px; flex-wrap:wrap; margin-top:32px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:13px 20px; border-radius:13px; font-weight:700; font-size:.92rem; transition:transform .2s, opacity .2s; }
+    .btn:hover { transform:translateY(-3px); }
+    .btn-primary { color:white; background:linear-gradient(110deg,#587cff,#9168ed); box-shadow:0 10px 35px rgba(104,117,255,.23); }
+    .btn-secondary { border:1px solid var(--line); background:rgba(255,255,255,.03); }
+    .profile-card {
+      position:relative; padding:30px; border:1px solid rgba(151,164,255,.2); border-radius:28px;
+      background:linear-gradient(145deg,rgba(24,31,52,.94),rgba(14,18,30,.94));
+      box-shadow:0 30px 90px rgba(0,0,0,.35); overflow:hidden;
+    }
+    .profile-card:before { content:""; position:absolute; width:220px; height:220px; right:-80px; top:-90px; border-radius:50%; background:rgba(108,140,255,.18); filter:blur(5px); }
+    .avatar { width:110px; height:110px; display:grid; place-items:center; border-radius:30px; font-size:2rem; font-weight:900; background:linear-gradient(135deg,#5b82ff,#a477ff); box-shadow:0 12px 35px rgba(108,140,255,.25); position:relative; }
+    .profile-card h2 { font-size:1.45rem; margin:22px 0 4px; }
+    .profile-card .sub { color:var(--muted); font-size:.9rem; margin:0; }
+    .profile-line { height:1px; background:var(--line); margin:23px 0; }
+    .meta { display:flex; justify-content:space-between; gap:12px; padding:7px 0; font-size:.88rem; }
+    .meta span:first-child { color:var(--muted); }
+    section { padding:78px 0; }
+    .section-head { margin-bottom:32px; max-width:720px; }
+    .section-head h2 { font-size:clamp(1.9rem,4vw,3rem); line-height:1.15; letter-spacing:-.035em; margin:10px 0 12px; }
+    .section-head p { color:var(--muted); margin:0; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .card { background:linear-gradient(145deg,rgba(20,26,42,.94),rgba(15,19,31,.94)); border:1px solid var(--line); border-radius:var(--radius); padding:27px; }
+    .card h3 { margin:0 0 10px; font-size:1.15rem; }
+    .card p { color:var(--muted); margin:0; }
+    .icon { width:43px; height:43px; display:grid; place-items:center; border-radius:13px; margin-bottom:18px; background:rgba(108,140,255,.13); color:#a9bbff; font-size:1.2rem; }
+    .reason-list { display:grid; gap:13px; }
+    .reason { display:flex; gap:14px; align-items:flex-start; padding:17px 19px; border:1px solid var(--line); border-radius:16px; background:rgba(255,255,255,.025); }
+    .check { color:var(--cyan); font-weight:900; font-size:1.1rem; }
+    .reason p { color:var(--muted); margin:3px 0 0; font-size:.93rem; }
+    .skills { display:flex; flex-wrap:wrap; gap:11px; margin-top:18px; }
+    .tag { padding:9px 14px; border:1px solid rgba(125,148,255,.22); background:rgba(108,140,255,.08); border-radius:999px; color:#dce3ff; font-size:.88rem; }
+    .tag.learning { border-color:rgba(99,216,232,.22); background:rgba(99,216,232,.07); color:#b7f2f7; }
+    .timeline { border-left:1px solid rgba(108,140,255,.35); margin-left:8px; padding-left:25px; display:grid; gap:23px; }
+    .timeline-item { position:relative; }
+    .timeline-item:before { content:""; position:absolute; left:-31px; top:7px; width:11px; height:11px; border-radius:50%; background:var(--blue); box-shadow:0 0 0 5px rgba(108,140,255,.13); }
+    .timeline-item h3 { margin:0 0 5px; font-size:1.05rem; }
+    .timeline-item p { color:var(--muted); margin:0; }
+    .future { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
+    .future .card { padding:22px; }
+    .number { color:var(--blue); font-size:.8rem; letter-spacing:.12em; font-weight:800; }
+    .quote { border:1px solid rgba(164,119,255,.2); background:linear-gradient(110deg,rgba(108,140,255,.09),rgba(164,119,255,.08)); border-radius:24px; padding:30px; font-size:1.1rem; color:#e2e6f8; }
+    footer { border-top:1px solid var(--line); padding:27px 0; color:var(--muted); font-size:.85rem; }
+    footer .container { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity .65s ease,transform .65s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+    @media (max-width:800px) {
+      .hero { grid-template-columns:1fr; min-height:auto; padding:75px 0; gap:35px; }
+      .profile-card { max-width:520px; }
+      .grid-2,.future { grid-template-columns:1fr; }
+      nav { display:none; position:absolute; left:20px; right:20px; top:68px; padding:18px; border:1px solid var(--line); border-radius:16px; background:#111522; flex-direction:column; align-items:flex-start; gap:15px; }
+      nav.open { display:flex; }
+      .menu-btn { display:block; }
+    }
+    @media (prefers-reduced-motion: reduce) { html{scroll-behavior:auto} .reveal{opacity:1;transform:none;transition:none} *{transition:none!important} }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home">AA<span>.</span></a>
+    <nav id="navigation">
+      <a href="#about">Обо мне</a>
+      <a href="#program">Программа</a>
+      <a href="#goals">Цели</a>
+      <a href="#skills">Навыки</a>
+      <a href="#achievements">Достижения</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Открыть меню">Меню</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <section class="hero" id="home">
+      <div>
+        <div class="eyebrow">Студент ГУАП · 09.03.03</div>
+        <h1>Стрионов<br><span class="gradient">Артем Андреевич</span></h1>
+        <p>Изучаю прикладную информатику и интересуюсь тем, как искусственный интеллект и современные технологии меняют привычные процессы и открывают новые возможности.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#about">Познакомиться</a>
+          <a class="btn btn-secondary" href="#goals">Мои цели</a>
+        </div>
+      </div>
+      <aside class="profile-card">
+        <div class="avatar">АА</div>
+        <h2>Артем Стрионов</h2>
+        <p class="sub">Студент направления «Прикладная информатика»</p>
+        <div class="profile-line"></div>
+        <div class="meta"><span>Учебная группа</span><strong>4618</strong></div>
+        <div class="meta"><span>Направление</span><strong>09.03.03</strong></div>
+        <div class="meta"><span>Программа</span><strong>Прикладной ИИ и наука о данных</strong></div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <div class="section-head reveal">
+        <div class="eyebrow">01 / Обо мне</div>
+        <h2>Интерес к технологиям —<br><span class="gradient">отправная точка развития</span></h2>
+        <p>Я студент первого курса ГУАП. Сейчас формирую базу знаний в области информационных технологий, изучаю программирование и знакомлюсь с возможностями искусственного интеллекта.</p>
+      </div>
+      <div class="grid-2">
+        <article class="card reveal">
+          <div class="icon">✦</div>
+          <h3>Что меня увлекает</h3>
+          <p>Больше всего меня привлекают искусственный интеллект и нейросети. Интересно разбираться, как работают такие технологии, какие задачи они могут решать и как применять их в реальных проектах.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">⌘</div>
+          <h3>Мой подход к обучению</h3>
+          <p>Хочу постепенно переходить от изучения теории к практике: осваивать инструменты, пробовать новые технологии и самостоятельно разбираться в принципах их работы.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="program">
+      <div class="section-head reveal">
+        <div class="eyebrow">02 / Образовательная программа</div>
+        <h2>Прикладной искусственный интеллект<br>и наука о данных</h2>
+        <p>Я понимаю эту образовательную программу как подготовку специалистов, которые умеют использовать методы информатики, анализировать данные и применять технологии искусственного интеллекта для решения практических задач.</p>
+      </div>
+      <div class="grid-2">
+        <article class="card reveal">
+          <div class="icon">◎</div>
+          <h3>Работа с данными</h3>
+          <p>Сбор, обработка и анализ информации помогают находить закономерности, делать выводы и принимать решения на основе данных.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">✧</div>
+          <h3>Искусственный интеллект</h3>
+          <p>Изучение нейросетей и машинного обучения открывает возможности для создания интеллектуальных систем и автоматизации различных процессов.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">⌁</div>
+          <h3>Программирование</h3>
+          <p>Программирование позволяет разрабатывать приложения, объединять технологии и превращать идеи в работающие решения.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">↗</div>
+          <h3>Практическое применение</h3>
+          <p>Полученные знания можно использовать в IT, бизнесе, науке, промышленности и других сферах, где важны данные и автоматизация.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="choice">
+      <div class="section-head reveal">
+        <div class="eyebrow">03 / Почему я выбрал эту программу</div>
+        <h2>Хочу быть частью<br><span class="gradient">технологического будущего</span></h2>
+        <p>При выборе направления на меня повлияли интерес к искусственному интеллекту и желание лучше понять современные технологии.</p>
+      </div>
+      <div class="reason-list reveal">
+        <div class="reason"><span class="check">✓</span><div><strong>Интерес к искусственному интеллекту</strong><p>Хочу понять, как устроены нейросети и каким образом они обучаются и применяются.</p></div></div>
+        <div class="reason"><span class="check">✓</span><div><strong>Быстрое развитие технологий</strong><p>Сфера ИИ постоянно развивается, поэтому в ней интересно учиться и открывать для себя новые инструменты.</p></div></div>
+        <div class="reason"><span class="check">✓</span><div><strong>Возможность профессионального роста</strong><p>Программа даёт возможность познакомиться с разными направлениями IT и со временем выбрать специализацию.</p></div></div>
+      </div>
+    </section>
+
+    <section id="goals">
+      <div class="section-head reveal">
+        <div class="eyebrow">04 / Профессиональные планы</div>
+        <h2>Постепенно найти своё<br><span class="gradient">направление в IT</span></h2>
+        <p>Пока я не выбрал одну конкретную профессию. Хочу попробовать разные направления, получить фундаментальные знания и понять, в какой области смогу наиболее эффективно развиваться.</p>
+      </div>
+      <div class="future">
+        <article class="card reveal"><div class="number">ЦЕЛЬ 01</div><h3>Освоить основы</h3><p>Углубить знания Python, изучить другие языки программирования и разобраться в базовых принципах работы ИИ.</p></article>
+        <article class="card reveal"><div class="number">ЦЕЛЬ 02</div><h3>Получить практику</h3><p>Научиться создавать собственные проекты, работать с данными и применять нейросети для решения задач.</p></article>
+        <article class="card reveal"><div class="number">ЦЕЛЬ 03</div><h3>Развиваться в профессии</h3><p>Попробовать себя в разных IT-направлениях, найти стажировку и в перспективе стать востребованным специалистом.</p></article>
+      </div>
+      <div class="quote reveal" style="margin-top:18px">В перспективе мне хотелось бы участвовать в разработке интеллектуальных приложений, автоматизации задач и создании решений на основе искусственного интеллекта.</div>
+    </section>
+
+    <section id="skills">
+      <div class="section-head reveal">
+        <div class="eyebrow">05 / Интересы и навыки</div>
+        <h2>Моя техническая база</h2>
+        <p>Сейчас я нахожусь на начальном этапе профессионального развития и постепенно осваиваю инструменты, которые используются в современной разработке.</p>
+      </div>
+      <div class="grid-2">
+        <article class="card reveal">
+          <h3>Языки программирования</h3>
+          <p>Начал изучать Python. Пока знакомлюсь с основами языка и продолжаю развивать навыки программирования.</p>
+          <div class="skills"><span class="tag learning">Python · изучаю</span></div>
+        </article>
+        <article class="card reveal">
+          <h3>Инструменты и технологии</h3>
+          <p>Использую цифровые инструменты для обучения, поиска информации и знакомства с разработкой.</p>
+          <div class="skills">
+            <span class="tag">ChatGPT</span><span class="tag">Gemini</span><span class="tag">GitHub</span><span class="tag">Visual Studio Code</span>
+          </div>
+        </article>
+      </div>
+      <div class="card reveal" style="margin-top:18px">
+        <h3>Направления, которые хочу изучать</h3>
+        <div class="skills">
+          <span class="tag">Нейронные сети</span><span class="tag">Машинное обучение</span><span class="tag">Анализ данных</span><span class="tag">Автоматизация</span><span class="tag">Разработка приложений с ИИ</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements">
+      <div class="section-head reveal">
+        <div class="eyebrow">06 / Достижения и активность</div>
+        <h2>Начало профессионального пути</h2>
+        <p>На данный момент я только начинаю развиваться в сфере информационных технологий, поэтому профильных достижений и участия в специализированных мероприятиях у меня пока нет.</p>
+      </div>
+      <div class="grid-2">
+        <article class="card reveal">
+          <div class="icon">＋</div>
+          <h3>Что впереди</h3>
+          <p>Планирую участвовать в IT-мероприятиях, образовательных программах, конкурсах и проектах, чтобы получать новый опыт и проверять знания на практике.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">↗</div>
+          <h3>Мой ориентир</h3>
+          <p>Постепенно сформировать портфолио, расширить технические навыки и найти области, в которых смогу создавать полезные технологические решения.</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <span>© 2026 Стрионов Артем Андреевич</span>
+    <span>ГУАП · Группа 4618 · Прикладная информатика</span>
+  </div>
+</footer>
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navigation = document.getElementById('navigation');
+  menuBtn.addEventListener('click', () => navigation.classList.toggle('open'));
+  navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navigation.classList.remove('open')));
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
